@@ -17,15 +17,21 @@ describe('kolobok function', () => {
   })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 60bf31a (refactoring kolobok function)
   it('should throw error for unknown character', () => {
     expect(() => {
       kolobok('неизвестный')
     }).toThrow('Я встретил кого-то неизвестного')
+<<<<<<< HEAD
 =======
   it('should return a default response for unknown character', () => {
     const result = kolobok('неизвестный')
     expect(result).toBe('Я встретил кого-то неизвестного')
 >>>>>>> 1293b2b (add test for tale)
+=======
+>>>>>>> 60bf31a (refactoring kolobok function)
   })
 })
 

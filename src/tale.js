@@ -8,10 +8,14 @@ export function kolobok(character) {
       return 'Меня съели'
     default:
 <<<<<<< HEAD
+<<<<<<< HEAD
       throw new Error('Я встретил кого-то неизвестного')
 =======
       return 'Я встретил кого-то неизвестного'
 >>>>>>> a5c8759 (add tale.js)
+=======
+        throw new Error('Я встретил кого-то неизвестного')
+>>>>>>> 60bf31a (refactoring kolobok function)
   }
 }
 
