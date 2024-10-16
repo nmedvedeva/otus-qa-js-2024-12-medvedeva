@@ -16,10 +16,16 @@ describe('kolobok function', () => {
     expect(result).toBe('Меня съели')
   })
 
+<<<<<<< HEAD
   it('should throw error for unknown character', () => {
     expect(() => {
       kolobok('неизвестный')
     }).toThrow('Я встретил кого-то неизвестного')
+=======
+  it('should return a default response for unknown character', () => {
+    const result = kolobok('неизвестный')
+    expect(result).toBe('Я встретил кого-то неизвестного')
+>>>>>>> 1293b2b (add test for tale)
   })
 })
 
@@ -35,8 +41,15 @@ describe('newYear function', () => {
   })
 
   it('should return a default response for unknown character', () => {
+<<<<<<< HEAD
     expect(() => {
       newYear('неизвестный')
     }).toThrow('Неизвестный персонаж')
   })
 })
+=======
+    const result = newYear('неизвестный')
+    expect(result).toBe('Неизвестный персонаж')
+  })
+})
+>>>>>>> 1293b2b (add test for tale)
