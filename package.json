@@ -57,10 +57,14 @@
   "license": "ISC",
   "devDependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d8299a0 (eslint config for jest)
     "@babel/cli": "^7.25.7",
     "@babel/core": "^7.25.8",
     "@babel/node": "^7.25.7",
     "@babel/preset-env": "^7.25.8",
+<<<<<<< HEAD
     "@eslint/js": "^9.12.0",
     "@types/jest": "^29.5.13",
     "eslint": "^9.12.0",
@@ -74,17 +78,17 @@
   }
 >>>>>>> fa9272a (npm init jest@latest)
 =======
+=======
+>>>>>>> d8299a0 (eslint config for jest)
     "@eslint/js": "^9.12.0",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-jest": "^28.8.3",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.10.0",
     "npm-run-all2": "^6.2.3",
     "prettier": "^3.3.3",
-    "@babel/cli": "^7.25.7",
-    "@babel/core": "^7.25.8",
-    "@babel/node": "^7.25.7",
-    "@babel/preset-env": "^7.25.8"
+    "jest": "^29.7.0"
   }
 >>>>>>> fa9272a (npm init jest@latest)
 }
