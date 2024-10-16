@@ -48,6 +48,7 @@ describe('newYear function', () => {
 
   it('should return a default response for unknown character', () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     expect(() => {
       newYear('неизвестный')
     }).toThrow('Неизвестный персонаж')
@@ -59,3 +60,10 @@ describe('newYear function', () => {
   })
 })
 >>>>>>> 1293b2b (add test for tale)
+=======
+    expect(() => {
+      newYear('неизвестный')
+    }).toThrow('Неизвестный персонаж')
+  })
+})
+>>>>>>> c7d7ef3 (refactoring newYear function)
