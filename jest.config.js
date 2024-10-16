@@ -32,7 +32,11 @@ const config = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
+<<<<<<< HEAD
   coverageProvider: 'v8',
+=======
+  coverageProvider: "v8",
+>>>>>>> fa9272a (npm init jest@latest)
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -107,7 +111,11 @@ const config = {
   // projects: undefined,
 
   // Use this configuration option to add custom reporters to Jest
+<<<<<<< HEAD
   reporters: [['github-actions', { silent: false }], 'summary']
+=======
+  // reporters: undefined,
+>>>>>>> fa9272a (npm init jest@latest)
 
   // Automatically reset mock state before every test
   // resetMocks: false,
@@ -193,6 +201,12 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+<<<<<<< HEAD
 }
 
 module.exports = config
+=======
+};
+
+module.exports = config;
+>>>>>>> fa9272a (npm init jest@latest)
