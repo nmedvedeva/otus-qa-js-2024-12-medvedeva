@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 console.log('Hello!')
 =======
 // Функция
@@ -10,6 +11,9 @@ function greet(name) {
 const farewell = name => {
   return `Goodbye, ${name}!`
 }
+=======
+import { greet, farewell } from './modules.js'
+>>>>>>> e89d41d (add babel)
 
 console.log(greet('World'))
 console.log(farewell('World'))
