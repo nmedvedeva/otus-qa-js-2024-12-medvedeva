@@ -15,6 +15,9 @@ jobs:
       - run: npm ci
       - run: npm run lint:ci
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eae3754 (add test to ci)
 
   test:
     runs-on: ubuntu-latest
@@ -27,5 +30,8 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm test
+<<<<<<< HEAD
 =======
 >>>>>>> 2163356 (add CI)
+=======
+>>>>>>> eae3754 (add test to ci)
