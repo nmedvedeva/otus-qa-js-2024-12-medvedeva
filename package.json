@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node src/main.js",
+        "start": "babel-node src/main.js",
         "lint:ci": "eslint .",
         "lint": "eslint . --fix"
     },
@@ -12,6 +12,7 @@
     "keywords": [],
     "license": "ISC",
     "devDependencies": {
+<<<<<<< HEAD
         "@eslint/js": "^9.18.0",
         "eslint": "^9.18.0",
         "eslint-config-prettier": "^10.0.1",
@@ -19,5 +20,18 @@
         "globals": "^15.14.0",
         "npm-run-all2": "^7.0.2",
         "prettier": "^3.4.2"
+=======
+        "@eslint/js": "^9.12.0",
+        "eslint": "^9.12.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "globals": "^15.10.0",
+        "npm-run-all2": "^6.2.3",
+        "prettier": "^3.3.3",
+        "@babel/cli": "^7.25.7",
+        "@babel/core": "^7.25.8",
+        "@babel/node": "^7.25.7",
+        "@babel/preset-env": "^7.25.8"
+>>>>>>> e89d41d (add babel)
     }
 }
