@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 console.log('Hello!')
 =======
 // Функция
@@ -18,3 +19,6 @@ import { greet, farewell } from './modules.js'
 console.log(greet('World'))
 console.log(farewell('World'))
 >>>>>>> 2b3b4d6 (add arrow functions)
+=======
+console.log('Hello!')
+>>>>>>> 22d97e4 (remove useless code)
