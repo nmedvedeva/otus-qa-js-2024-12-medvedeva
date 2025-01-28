@@ -91,9 +91,9 @@ describe('getTotal', () => {
       10,
       45
     ]
-  ];
+  ]
 
   test.each(table)('%s', (name, items, discount, expectedTotal) => {
-    expect(getTotal(items, discount)).toBe(expectedTotal);
-  });
+    expect(getTotal(items, discount)).toBe(expectedTotal)
+  })
 })
