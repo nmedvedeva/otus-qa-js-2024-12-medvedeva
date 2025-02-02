@@ -1,47 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "name": "otus-qajs",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "babel-node src/main.js",
-        "lint:ci": "eslint .",
-        "lint": "eslint . --fix"
-    },
-    "author": "Damir Rysaev <freepad@ya.ru>",
-    "keywords": [],
-    "license": "ISC",
-    "devDependencies": {
-<<<<<<< HEAD
-        "@eslint/js": "^9.18.0",
-        "eslint": "^9.18.0",
-        "eslint-config-prettier": "^10.0.1",
-        "eslint-plugin-prettier": "^5.2.3",
-        "globals": "^15.14.0",
-        "npm-run-all2": "^7.0.2",
-        "prettier": "^3.4.2"
-=======
-        "@eslint/js": "^9.12.0",
-        "eslint": "^9.12.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-prettier": "^5.2.1",
-        "globals": "^15.10.0",
-        "npm-run-all2": "^6.2.3",
-        "prettier": "^3.3.3",
-        "@babel/cli": "^7.25.7",
-        "@babel/core": "^7.25.8",
-        "@babel/node": "^7.25.7",
-        "@babel/preset-env": "^7.25.8"
-<<<<<<< HEAD
->>>>>>> e89d41d (add babel)
-=======
->>>>>>> e89d41d (add babel)
-    }
-=======
-=======
->>>>>>> fa9272a (npm init jest@latest)
   "name": "otus-qajs",
   "version": "1.0.0",
   "description": "",
@@ -50,46 +7,26 @@
     "start": "babel-node src/main.js",
     "lint:ci": "eslint .",
     "lint": "eslint . --fix",
-    "test": "jest"
+    "test": "jest",
+    "test:myComponent": "jest specs/api.spec.js"
   },
-  "author": "Damir Rysaev <freepad@ya.ru>",
+  "author": "Nadezhda Medvedeva <griinadiine@yandex.ru>",
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> d8299a0 (eslint config for jest)
     "@babel/cli": "^7.25.7",
     "@babel/core": "^7.25.8",
     "@babel/node": "^7.25.7",
     "@babel/preset-env": "^7.25.8",
-<<<<<<< HEAD
     "@eslint/js": "^9.12.0",
     "@types/jest": "^29.5.13",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jest": "^28.8.3",
+    "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.10.0",
     "jest": "^29.7.0",
     "npm-run-all2": "^6.2.3",
     "prettier": "^3.3.3"
   }
->>>>>>> fa9272a (npm init jest@latest)
-=======
-=======
->>>>>>> d8299a0 (eslint config for jest)
-    "@eslint/js": "^9.12.0",
-    "@types/jest": "^29.5.13",
-    "eslint": "^9.12.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jest": "^28.8.3",
-    "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.10.0",
-    "jest": "^29.7.0",
-    "npm-run-all2": "^6.2.3",
-    "prettier": "^3.3.3"
-  }
->>>>>>> fa9272a (npm init jest@latest)
 }
