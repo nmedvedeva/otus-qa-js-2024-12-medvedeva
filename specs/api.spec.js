@@ -59,7 +59,7 @@ describe('Test for generate token', () => {
     expect(data.status).toBe('Success')
     expect(data.token).toBeTruthy()
   })
-  it('Test for success generate token', async () => {
+  it('Test for unsuccessful generate token', async () => {
     const response = await fetch(base_url + '/Account/v1/GenerateToken', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
