@@ -9,7 +9,7 @@
     "lint": "eslint . --fix",
     "test": "jest"
   },
-  "author": "Damir Rysaev <freepad@ya.ru>",
+  "author": "Nadezhda Medvedeva <griinadiine@yandex.ru>",
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
@@ -18,6 +18,7 @@
     "@babel/node": "^7.25.7",
     "@babel/preset-env": "^7.25.8",
     "@eslint/js": "^9.12.0",
+    "@faker-js/faker": "^9.4.0",
     "@types/jest": "^29.5.13",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
