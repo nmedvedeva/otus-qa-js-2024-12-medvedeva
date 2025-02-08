@@ -38,3 +38,30 @@ export const getTotal = (items = [], discount = 0) => {
   const total = items.reduce((acc, { price, quantity }) => acc + price * quantity, 0)
   return total * (1 - discount / 100)
 }
+
+/**
+ * Подсчёт суммы баллов успеваемости всех пользователей.
+ * 
+ * @param {Object} scores - Объект, содержащий никнеймы пользователей и их баллы.
+ * @returns {number} - Общий балл всех пользователей.
+ * 
+ * @example
+ * const scores = {
+ *   Anna: 10,
+ *   Olga: 1,
+ *   Ivan: 5,
+ * };
+ * const totalScore = getScore(scores);
+ * console.log(totalScore); // 16
+ */
+export function getScore(scores) {
+  let totalScore = 0;
+
+  for (let nickname in scores) {
+    if (typeof scores[nickname] === 'number') {
+      totalScore += scores[nickname];
+    }
+  }
+
+  return totalScore;
+}
