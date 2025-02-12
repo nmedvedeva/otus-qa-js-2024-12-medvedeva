@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: push
 
 jobs:
   codestyle:
@@ -14,10 +14,6 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run lint:ci
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> eae3754 (add test to ci)
 
   test:
     runs-on: ubuntu-latest
@@ -29,9 +25,5 @@ jobs:
           node-version: 20.18.0
           cache: 'npm'
       - run: npm ci
+      - run: echo "${{vars.ENV_FILE}}" >> .env
       - run: npm test
-<<<<<<< HEAD
-=======
->>>>>>> 2163356 (add CI)
-=======
->>>>>>> eae3754 (add test to ci)
