@@ -7,7 +7,7 @@
     "start": "babel-node src/main.js",
     "lint:ci": "eslint .",
     "lint": "eslint . --fix",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:myComponent": "jest specs/api.spec.js"
   },
   "author": "Nadezhda Medvedeva <griinadiine@yandex.ru>",

@@ -1,9 +1,9 @@
 import config from '../framework/config/config.js'
-import UserCreate from '../framework/services/UserService.js'
+import UserService from '../framework/services/UserService.js'
 
-describe('Auth', () => {
+describe('User', () => {
   test('success user create', async () => {
-    const response = await UserCreate({
+    const response = await UserService.create({
       userName: config.login_correct,
       password: config.password_correct
     })
@@ -11,50 +11,40 @@ describe('Auth', () => {
     expect(response.data.username).toBe(config.login_correct)
   })
   test('busy login', async () => {
-    const response = await UserCreate({
+    const response = await UserService.create({
       userName: config.login_correct,
       password: config.password_correct
     })
-    const data = response.data
     expect(response.status).toBe(406)
-    expect(data.message).toBe('User exists!')
+    expect(response.data.message).toBe('User exists!')
   })
   test('incorrect password', async () => {
-    const response = await axios.post(
-      `${config.baseURL}/Account/v1/User`,
-      {
-        userName: config.login_correct,
-        password: config.password_incorrect
-      },
-      {
-        validateStatus: () => true
-      }
-    )
-    const data = response.data
+    const response = await UserService.create({
+      userName: config.login_correct,
+      password: config.password_incorrect
+    })
     expect(response.status).toBe(400)
-    expect(data.message).toBeTruthy()
+    expect(response.data.message).toBeTruthy()
   })
 })
 
 describe('Test for generate token', () => {
-  test('Tests for success generate token', async () => {
-    const response = await axios.post(`${config.baseURL}/Account/v1/GenerateToken`, {
+  test('for success generate token', async () => {
+    const response = await UserService.generate({
       userName: config.login_correct,
       password: config.password_correct
     })
-    const data = response.data
     expect(response.status).toBe(200)
-    expect(data.status).toBe('Success')
-    expect(data.token).toBeTruthy()
+    expect(response.data.status).toBe('Success')
+    expect(response.data.token).toBeTruthy()
   })
   test('for unsuccessful generate token', async () => {
-    const response = await axios.post(`${config.baseURL}/Account/v1/GenerateToken`, {
+    const response = await UserService.generate({
       userName: config.login_correct,
       password: config.password_incorrect
     })
-    const data = response.data
     expect(response.status).toBe(200)
-    expect(data.status).toBe('Failed')
-    expect(data.token).toBeNull()
+    expect(response.data.status).toBe('Failed')
+    expect(response.data.token).toBeNull()
   })
 })
