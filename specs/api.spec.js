@@ -48,3 +48,20 @@ describe('Test for generate token', () => {
     expect(response.data.token).toBeNull()
   })
 })
+
+describe('Test for delete user', () => {
+  test('for success delete user', async () => {
+    const response = await UserService.delete({
+      userId: userId
+    })
+    expect(response.status).toBe(200)
+    expect(response.data.status).toBe('Success')
+  })
+  test('for unsuccessful delete user', async () => {
+    const response = await UserService.delete({
+      userId: userId
+    })
+    expect(response.status).toBe(401)
+    expect(response.data.status).toBe('Unauthorized')
+  })
+})

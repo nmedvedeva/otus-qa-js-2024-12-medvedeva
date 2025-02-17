@@ -11,6 +11,19 @@ const UserCreate = async ({ userName, password }) => {
     userName,
     password
   })
+  const userId = response.data.UserId
+
+  return {
+    headers: response.headers,
+    status: response.status,
+    data: response.data
+  }
+}
+
+const UserDelete = async ( userId ) => {
+  const response = await client.delete(`/Account/v1/User/${userId}`, {
+    userId
+  })
 
   return {
     headers: response.headers,
@@ -34,5 +47,6 @@ const GenerateToken = async ({ userName, password }) => {
 
 export default {
   create: UserCreate,
+  delete: UserDelete,
   generate: GenerateToken
 }

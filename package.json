@@ -8,7 +8,8 @@
     "lint:ci": "eslint .",
     "lint": "eslint . --fix",
     "test": "jest --runInBand",
-    "test:myComponent": "jest specs/api.spec.js"
+    "test:myComponent": "jest specs/api.spec.js",
+    "test:Auth": "jest specs/auth.spec.js"
   },
   "author": "Nadezhda Medvedeva <griinadiine@yandex.ru>",
   "keywords": [],
