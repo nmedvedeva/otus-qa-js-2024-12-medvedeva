@@ -17,7 +17,18 @@ const UserCreate = async ({ username, firstName, lastName, email, password, phon
         data: response.data
     }
 }
+const UserGet = async ( username ) => {
+    console.log(`/user/${username}`)
+    const response = await client.get(`/user/${username}`)
+
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
+    }
+}
 
 export default {
-    create: UserCreate
+    create: UserCreate,
+    get: UserGet
 }

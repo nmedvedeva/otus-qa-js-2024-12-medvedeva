@@ -2,7 +2,7 @@ import config from '../../framework/config/petstore/config.js'
 import UserService from '../../framework/services/petstore/UserService.js'
 import { generateUserCredentials } from '../../framework/fixtures/randomUser.js'
 
-let testUser, testUsername, testUserPassword, testUserEmail, testFirstName, testLastName, testPhone, testUserStatus
+let testUser, testUsername, testUserPassword, testUserEmail, testFirstName, testLastName, testPhone, testUserStatus, testUserId
 
 beforeAll(async () => {
   const randomUser = await generateUserCredentials()
@@ -27,8 +27,6 @@ describe('User create tests', () => {
       phone: testPhone, 
       userStatus: testUserStatus
     })
-    console.log(testUsername, testUserPassword, testFirstName, testLastName, testUserEmail, testPhone, testUserStatus)
-    console.log(response) 
     expect(response.status).toBe(200)
     expect(response.data.message).toBe("ok")
   })
@@ -49,3 +47,14 @@ describe('User create tests', () => {
     expect(response.data.message).toBeTruthy()
   })*/
 })
+
+describe('Get user by username', () => {
+  test('successful operation', async () => {
+    const response = await UserService.get(testUsername)
+    console.log(response)
+    expect(response.status).toBe(200)
+    //expect(response.data.message).toBe("ok")
+  })
+})
+/*console.log(testUsername, testUserPassword, testFirstName, testLastName, testUserEmail, testPhone, testUserStatus)
+console.log(response)*/
