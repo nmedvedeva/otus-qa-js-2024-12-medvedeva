@@ -7,9 +7,9 @@ const client = axios.create({
 })
 
 const UserCreate = async ({ username, firstName, lastName, email, password, phone, userStatus }) => {
-    const response = await client.post(`/user/createWithArray`, {
+    const response = await client.post(`/user/createWithArray`, [{
         username, firstName, lastName, email, password, phone, userStatus
-    })
+    }])
 
     return {
         headers: response.headers,

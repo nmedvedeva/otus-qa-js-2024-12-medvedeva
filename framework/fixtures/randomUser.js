@@ -7,7 +7,7 @@ export async function generateUserCredentials() {
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
         email: faker.internet.email(),
-        phone: faker.phone.number(),
+        phone: faker.number.int(),
         userStatus: 0
     }
 }
