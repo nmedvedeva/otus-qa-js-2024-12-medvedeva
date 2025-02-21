@@ -11,7 +11,6 @@ const UserCreate = async ({ userName, password }) => {
     userName,
     password
   })
-  const userId = response.data.UserId
 
   return {
     headers: response.headers,
@@ -20,9 +19,25 @@ const UserCreate = async ({ userName, password }) => {
   }
 }
 
-const UserDelete = async ( userId ) => {
-  const response = await client.delete(`/Account/v1/User/${userId}`, {
-    userId
+const UserDelete = async ( userID, token ) => {
+  const response = await client.delete(`/Account/v1/User/${userID}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  return {
+    headers: response.headers,
+    status: response.status,
+    data: response.data
+  }
+}
+
+const UserGetInfo = async ({ userID, token }) => {
+  const response = await client.get(`/Account/v1/User/${userID}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   })
 
   return {
@@ -48,5 +63,6 @@ const GenerateToken = async ({ userName, password }) => {
 export default {
   create: UserCreate,
   delete: UserDelete,
+  get: UserGetInfo,
   generate: GenerateToken
 }
