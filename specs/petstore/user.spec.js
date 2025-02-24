@@ -1,4 +1,4 @@
-import config from '../../framework/config/petstore/config.js'
+//import config from '../../framework/config/petstore/config.js'
 import UserService from '../../framework/services/petstore/UserService.js'
 import { generateUserCredentials } from '../../framework/fixtures/randomUser.js'
 
@@ -21,40 +21,62 @@ describe('User create tests', () => {
     const response = await UserService.create({
       username: testUsername,
       password: testUserPassword,
-      firstName: testFirstName, 
-      lastName: testLastName, 
-      email: testUserEmail, 
-      phone: testPhone, 
+      firstName: testFirstName,
+      lastName: testLastName,
+      email: testUserEmail,
+      phone: testPhone,
       userStatus: testUserStatus
     })
     expect(response.status).toBe(200)
     expect(response.data.message).toBe("ok")
   })
-  /*test('busy login', async () => {  
-    const response = await UserService.create({
-      userName: testUserName,
-      password: testUserPassword
-    })  
-    expect(response.status).toBe(406)
-    expect(response.data.message).toBe('User exists!')
-  })
-  test('incorrect password', async () => {
-    const response = await UserService.create({
-      userName: testUserName,
-      password: config.password_incorrect
-    })
-    expect(response.status).toBe(400)
-    expect(response.data.message).toBeTruthy()
-  })*/
 })
 
 describe('Get user by username', () => {
   test('successful operation', async () => {
     const response = await UserService.get(testUsername)
-    console.log(response)
     expect(response.status).toBe(200)
-    //expect(response.data.message).toBe("ok")
+  })
+  test('user does not exist', async () => {
+    const response = await UserService.get(`${testUsername}test`)
+    expect(response.status).toBe(404)
+    expect(response.data.message).toBe('User not found')
   })
 })
-/*console.log(testUsername, testUserPassword, testFirstName, testLastName, testUserEmail, testPhone, testUserStatus)
-console.log(response)*/
+
+describe('User login tests', () => {
+  test('success login', async () => {
+    const response = await UserService.login({
+      username: testUsername,
+      password: testUserPassword
+    })
+    expect(response.status).toBe(200)
+    expect(response.data.message).toContain('logged in user session')
+  })
+})
+
+describe('Update user by username', () => {
+  test('successful operation', async () => {
+    const response = await UserService.update(testUsername, testUser)
+    expect(response.status).toBe(200)
+  })
+})
+
+describe('Delete user by username', () => {
+  test('successful delete', async () => {
+    const response = await UserService.delete(testUsername)
+    expect(response.status).toBe(200)
+    expect(response.data.message).toBe(testUsername)
+  })
+  test('delete user does not exist', async () => {
+    const response = await UserService.delete(`${testUsername}test`)
+    expect(response.status).toBe(404)
+  })
+})
+
+describe('User logout tests', () => {
+  test('success logout', async () => {
+    const response = await UserService.logout()
+    expect(response.status).toBe(200)
+  })
+})
