@@ -1,4 +1,3 @@
-//import config from '../../framework/config/petstore/config.js'
 import UserService from '../../framework/services/petstore/UserService.js'
 import { generateUserCredentials } from '../../framework/fixtures/randomUser.js'
 
@@ -60,6 +59,11 @@ describe('Update user by username', () => {
     const response = await UserService.update(testUsername, testUser)
     expect(response.status).toBe(200)
   })
+  test('user does not exist', async () => {
+    const response = await UserService.update(test, testUser)
+    expect(response.status).toBe(404)
+    expect(response.data.message).toBe('User not found')
+  })
 })
 
 describe('Delete user by username', () => {
@@ -72,6 +76,10 @@ describe('Delete user by username', () => {
     const response = await UserService.delete(`${testUsername}test`)
     expect(response.status).toBe(404)
   })
+  test('repeated deletion', async () => {
+    const response1 = await UserService.delete(testUsername)
+    expect(response1.status).toBe(404)
+  })
 })
 
 describe('User logout tests', () => {
@@ -80,3 +88,6 @@ describe('User logout tests', () => {
     expect(response.status).toBe(200)
   })
 })
+/*console.log(testUsername, testUserPassword, testFirstName, testLastName, testUserEmail, testPhone, testUserStatus)
+console.log(response)*/
+//{testUsername, testFirstName, testLastName, testUserEmail, testUserPassword, testPhone, testUserStatus}
