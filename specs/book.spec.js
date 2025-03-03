@@ -1,3 +1,4 @@
+/* eslint-disable */
 import UserService from '../framework/services/UserService.js'
 import AuthService from '../framework/services/AuthService.js'
 import BookService from '../framework/services/BookService.js'
@@ -30,3 +31,4 @@ describe('Add book tests', () => {
     expect(response.data.token).toBeTruthy()
   })
 })
+/* eslint-enable */

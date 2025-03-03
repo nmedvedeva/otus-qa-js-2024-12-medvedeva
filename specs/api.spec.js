@@ -3,7 +3,7 @@ import UserService from '../framework/services/UserService.js'
 import AuthService from '../framework/services/AuthService.js'
 import { generateUserBookstore } from '../framework/fixtures/randomUser.js'
 
-let testUserName, testUserPassword, testUser, responseNewUser, token, newUserToken, testUserId
+let testUserName, testUserPassword, testUser, responseNewUser, token, testUserId
 
 beforeAll(async () => {
   const randomUser = await generateUserBookstore()
@@ -29,7 +29,6 @@ describe('User create tests', () => {
     })
     expect(responseNewUser.status).toBe(201)
     expect(responseNewUser.data.username).toBe(newUserName)
-    newUserToken = responseNewUser.data.token
   })
   test('busy login', async () => {
     const response = await UserService.create({

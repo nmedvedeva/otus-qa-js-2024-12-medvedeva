@@ -1,14 +1,7 @@
 import UserService from '../../framework/services/petstore/UserService.js'
 import { generateUserCredentials } from '../../framework/fixtures/randomUser.js'
 
-let testUser,
-  testUsername,
-  testUserPassword,
-  testUserEmail,
-  testFirstName,
-  testLastName,
-  testPhone,
-  testUserStatus
+let testUser, testUsername, testUserPassword, testUserEmail, testFirstName, testLastName, testPhone, testUserStatus
 
 beforeAll(async () => {
   const randomUser = await generateUserCredentials()
