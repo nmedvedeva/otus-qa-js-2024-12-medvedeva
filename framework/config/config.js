@@ -5,7 +5,6 @@ dotenv.config()
 export const config = {
   baseURL: 'https://bookstore.demoqa.com',
   login_correct: 'nanan111',
-  login_not_found: 'usr',
   password_correct: 'Password123!',
   password_incorrect: 'Pass'
 }

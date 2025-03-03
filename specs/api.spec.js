@@ -88,7 +88,7 @@ describe('Auth user tests', () => {
   })
   test('user not found', async () => {
     const response = await AuthService.login({
-      userName: config.login_not_found,
+      userName: 'user',
       password: testUserPassword
     })
     expect(response.status).toBe(404)
