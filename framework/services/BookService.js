@@ -21,4 +21,4 @@ const BookCreate = async ({ userId, collectionOfIsbns }) => {
 
 export default {
     create: BookCreate
-  }
+}

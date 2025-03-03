@@ -20,22 +20,22 @@ beforeAll(async () => {
 
 describe('User create tests', () => {
   test('success user create', async () => {
-    const newUser = await generateUserBookstore()    
+    const newUser = await generateUserBookstore()
     const newUserName = newUser.userName
     const newUserPassword = newUser.password
     responseNewUser = await UserService.create({
       userName: newUserName,
       password: newUserPassword
-    }) 
+    })
     expect(responseNewUser.status).toBe(201)
     expect(responseNewUser.data.username).toBe(newUserName)
     newUserToken = responseNewUser.data.token
   })
-  test('busy login', async () => {  
+  test('busy login', async () => {
     const response = await UserService.create({
       userName: testUserName,
       password: testUserPassword
-    })  
+    })
     expect(response.status).toBe(406)
     expect(response.data.message).toBe('User exists!')
   })
@@ -79,7 +79,7 @@ describe('Auth user tests', () => {
     expect(response.status).toBe(200)
     expect(response.data).toBe(true)
   })
-  test('incorrect password', async () => {    
+  test('incorrect password', async () => {
     const response = await AuthService.login({
       userName: testUserName,
       password: config.password_incorrect

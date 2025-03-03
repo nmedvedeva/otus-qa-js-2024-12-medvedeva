@@ -3,11 +3,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const config = {
-  baseURL: process.env.BASE_URL,
-  login_correct: process.env.LOGIN_CORRECT,
-  login_not_found: process.env.LOGIN_NOT_FOUND,
-  password_correct: process.env.PASSWORD_CORRECT,
-  password_incorrect: process.env.PASSWORD_INCORRECT
+  baseURL: 'https://bookstore.demoqa.com',
+  login_correct: 'nanan111',
+  login_not_found: 'usr',
+  password_correct: 'Password123!',
+  password_incorrect: 'Pass'
 }
 
 export default config

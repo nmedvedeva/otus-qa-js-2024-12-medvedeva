@@ -88,6 +88,3 @@ describe('User logout tests', () => {
     expect(response.status).toBe(200)
   })
 })
-/*console.log(testUsername, testUserPassword, testFirstName, testLastName, testUserEmail, testPhone, testUserStatus)
-console.log(response)*/
-//{testUsername, testFirstName, testLastName, testUserEmail, testUserPassword, testPhone, testUserStatus}

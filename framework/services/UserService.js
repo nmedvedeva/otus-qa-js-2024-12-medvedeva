@@ -19,7 +19,7 @@ const UserCreate = async ({ userName, password }) => {
   }
 }
 
-const UserDelete = async ( userID, token ) => {
+const UserDelete = async (userID, token) => {
   const response = await client.delete(`/Account/v1/User/${userID}`, {
     headers: {
       Authorization: `Bearer ${token}`
