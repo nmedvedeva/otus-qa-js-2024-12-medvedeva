@@ -41,10 +41,10 @@ export const getTotal = (items = [], discount = 0) => {
 
 /**
  * Подсчёт суммы баллов успеваемости всех пользователей.
- * 
+ *
  * @param {Object} scores - Объект, содержащий никнеймы пользователей и их баллы.
  * @returns {number} - Общий балл всех пользователей.
- * 
+ *
  * @example
  * const scores = {
  *   Anna: 10,
@@ -55,13 +55,13 @@ export const getTotal = (items = [], discount = 0) => {
  * console.log(totalScore); // 16
  */
 export function getScore(scores) {
-  let totalScore = 0;
+  let totalScore = 0
 
   for (let nickname in scores) {
     if (typeof scores[nickname] === 'number') {
-      totalScore += scores[nickname];
+      totalScore += scores[nickname]
     }
   }
 
-  return totalScore;
+  return totalScore
 }
