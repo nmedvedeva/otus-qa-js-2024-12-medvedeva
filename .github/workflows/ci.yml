@@ -24,5 +24,4 @@ jobs:
           node-version: 20.18.0
           cache: 'npm'
       - run: npm ci
-      - run: echo "${{vars.ENV_FILE}}" >> .env
       - run: npm test
