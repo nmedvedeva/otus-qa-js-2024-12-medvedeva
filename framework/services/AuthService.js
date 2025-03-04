@@ -6,10 +6,13 @@ const auth = axios.create({
   validateStatus: () => true
 })
 
-const UserAuthorized = async ({ userName, password }) => {
+const UserAuthorized = async ({ userName, password, token }) => {
   const response = await auth.post(`/Account/v1/Authorized`, {
     userName,
-    password
+    password,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   })
 
   return {

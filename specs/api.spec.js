@@ -3,7 +3,7 @@ import UserService from '../framework/services/UserService.js'
 import AuthService from '../framework/services/AuthService.js'
 import { generateUserBookstore } from '../framework/fixtures/randomUser.js'
 
-let testUserName, testUserPassword, testUser, responseNewUser, token, testUserId
+let testUserName, testUserPassword, testUser, responseNewUser, token, testUserId, newUserName, newUserPassword, newUserId
 
 beforeAll(async () => {
   const randomUser = await generateUserBookstore()
@@ -21,14 +21,16 @@ beforeAll(async () => {
 describe('User create tests', () => {
   test('success user create', async () => {
     const newUser = await generateUserBookstore()
-    const newUserName = newUser.userName
-    const newUserPassword = newUser.password
+    newUserName = newUser.userName
+    newUserPassword = newUser.password
     responseNewUser = await UserService.create({
       userName: newUserName,
       password: newUserPassword
     })
+    newUserId = responseNewUser.data.userID
     expect(responseNewUser.status).toBe(201)
     expect(responseNewUser.data.username).toBe(newUserName)
+    console.log(responseNewUser)
   })
   test('busy login', async () => {
     const response = await UserService.create({
@@ -51,8 +53,8 @@ describe('User create tests', () => {
 describe('Generate token tests', () => {
   test('for success generate token', async () => {
     const response = await UserService.generate({
-      userName: testUserName,
-      password: testUserPassword
+      userName: newUserName,
+      password: newUserPassword
     })
     expect(response.status).toBe(200)
     expect(response.data.status).toBe('Success')
@@ -60,7 +62,7 @@ describe('Generate token tests', () => {
   })
   test('for unsuccessful generate token', async () => {
     const response = await UserService.generate({
-      userName: testUserName,
+      userName: newUserName,
       password: config.password_incorrect
     })
     expect(response.status).toBe(200)
@@ -114,16 +116,15 @@ describe('Auth user tests', () => {
 
 describe('Get info about user tests', () => {
   test('for success get info', async () => {
-    const response = await UserService.get(testUserId, token)
-    expect(response.status).toBe(200) //баг апи, 401 ответ даже при авторизованном пользователе
-    expect(response.data.status).toBe('Success')
+    const response = await UserService.get({ userID: testUserId, token })
+    expect(response.status).toBe(200)
   })
   test('for unsuccessful get info', async () => {
-    const response = await UserService.get(111)
+    const response = await UserService.get({ userID: 111 })
     expect(response.status).toBe(401)
   })
   test('for unauthorized user', async () => {
-    const response = await UserService.get(responseNewUser.data.userID, token)
+    const response = await UserService.get({ userID: config.testUserId, token })
     expect(response.status).toBe(401)
   })
 })
