@@ -10,7 +10,8 @@
     "test": "jest --runInBand",
     "test:myComponent": "jest specs/api.spec.js",
     "test:Auth": "jest specs/auth.spec.js",
-    "test:Create": "jest specs/petstore/user.spec.js"
+    "test:Create": "jest specs/petstore/user.spec.js",
+    "test:Book": "jest specs/book.spec.js"
   },
   "author": "Nadezhda Medvedeva <griinadiine@yandex.ru>",
   "keywords": [],

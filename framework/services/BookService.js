@@ -6,10 +6,13 @@ const client = axios.create({
   validateStatus: () => true
 })
 
-const BookCreate = async ({ userId, collectionOfIsbns }) => {
+const BookCreate = async ({ userId, isbns, token }) => {
   const response = await client.post(`/BookStore/v1/Books`, {
     userId: userId,
-    collectionOfIsbns: collectionOfIsbns
+    collectionOfIsbns: isbns.map(isbn => ({ isbn })),
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   })
 
   return {
@@ -19,6 +22,16 @@ const BookCreate = async ({ userId, collectionOfIsbns }) => {
   }
 }
 
+const BooksGetAll = async () => {
+  const response = await client.get(`/BookStore/v1/Books`)
+  return {
+    headers: response.headers,
+    status: response.status,
+    data: response.data
+  }
+}
+
 export default {
-  create: BookCreate
+  create: BookCreate,
+  get: BooksGetAll
 }
