@@ -6,7 +6,11 @@ const client = axios.create({
   validateStatus: () => true
 })
 
+/**
+ * это не создание книги, а добавление книги (книг точнее) в коллекцию к пользователю
+ */
 const BookCreate = async ({ userId, collectionOfIsbns }) => {
+  // этот метод требует авторизации (нужно передать токен)
   const response = await client.post(`/BookStore/v1/Books`, {
     userId: userId,
     collectionOfIsbns: collectionOfIsbns
