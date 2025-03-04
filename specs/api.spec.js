@@ -114,16 +114,19 @@ describe('Auth user tests', () => {
 
 describe('Get info about user tests', () => {
   test('for success get info', async () => {
-    const response = await UserService.get(testUserId, token)
+    const response = await UserService.get({ userID: testUserId, token })
     expect(response.status).toBe(200) //баг апи, 401 ответ даже при авторизованном пользователе
     expect(response.data.status).toBe('Success')
   })
   test('for unsuccessful get info', async () => {
-    const response = await UserService.get(111)
+    const response = await UserService.get({ userID: 111 })
     expect(response.status).toBe(401)
   })
   test('for unauthorized user', async () => {
-    const response = await UserService.get(responseNewUser.data.userID, token)
+    // responseNewUser переменная создаётся  вдругом тесте, тут в теории её может и не быть
+    // точно не будет, если попытаемся запустить не весь файл. а только этот тест
+    // node 'node_modules/.bin/jest' '/tmp/otus-qa-js-2024-12-medvedeva/specs/api.spec.js' -t 'Get info about user tests'
+    const response = await UserService.get({ userID: responseNewUser.data.userID, token })
     expect(response.status).toBe(401)
   })
 })
