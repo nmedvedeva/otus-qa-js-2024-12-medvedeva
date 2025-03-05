@@ -3,7 +3,7 @@ import UserService from '../framework/services/UserService.js'
 import AuthService from '../framework/services/AuthService.js'
 import { generateUserBookstore } from '../framework/fixtures/randomUser.js'
 
-let testUserName, testUserPassword, testUser, responseNewUser, token, testUserId, newUserName, newUserPassword, newUserId
+let testUserName, testUserPassword, testUser, responseNewUser, token, testUserId, newUserName, newUserPassword
 
 beforeAll(async () => {
   const randomUser = await generateUserBookstore()
@@ -19,7 +19,7 @@ beforeAll(async () => {
 })
 
 /**
- * тесты по д/з "Препарируем http запросы" 
+ * тесты по д/з "Препарируем http запросы"
  */
 describe('User create tests', () => {
   test('success user create', async () => {
@@ -30,7 +30,6 @@ describe('User create tests', () => {
       userName: newUserName,
       password: newUserPassword
     })
-    newUserId = responseNewUser.data.userID
     expect(responseNewUser.status).toBe(201)
     expect(responseNewUser.data.username).toBe(newUserName)
     console.log(responseNewUser)
@@ -74,11 +73,11 @@ describe('Generate token tests', () => {
   })
 })
 /**
- * конец тестов по д/з "Препарируем http запросы" 
+ * конец тестов по д/з "Препарируем http запросы"
  */
 
 /**
- * тесты по д/з "Библиотеки для тестирования API" 
+ * тесты по д/з "Библиотеки для тестирования API"
  */
 describe('Auth user tests', () => {
   test('success user authorized', async () => {
@@ -150,5 +149,5 @@ describe('Delete user tests', () => {
   })
 })
 /**
- * конец тестов по д/з "Библиотеки для тестирования API" 
+ * конец тестов по д/з "Библиотеки для тестирования API"
  */
