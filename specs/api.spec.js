@@ -32,7 +32,6 @@ describe('User create tests', () => {
     })
     expect(responseNewUser.status).toBe(201)
     expect(responseNewUser.data.username).toBe(newUserName)
-    console.log(responseNewUser)
   })
   test('busy login', async () => {
     const response = await UserService.create({
