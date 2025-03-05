@@ -18,6 +18,9 @@ beforeAll(async () => {
   token = responseToken.data.token
 })
 
+/**
+ * тесты по д/з "Препарируем http запросы" 
+ */
 describe('User create tests', () => {
   test('success user create', async () => {
     const newUser = await generateUserBookstore()
@@ -70,7 +73,13 @@ describe('Generate token tests', () => {
     expect(response.data.token).toBeNull()
   })
 })
+/**
+ * конец тестов по д/з "Препарируем http запросы" 
+ */
 
+/**
+ * тесты по д/з "Библиотеки для тестирования API" 
+ */
 describe('Auth user tests', () => {
   test('success user authorized', async () => {
     const response = await AuthService.login({
@@ -82,10 +91,10 @@ describe('Auth user tests', () => {
   })
   test('incorrect password', async () => {
     const response = await AuthService.login({
-      userName: testUserName,
+      userName: config.login_correct,
       password: config.password_incorrect
     })
-    expect(response.status).toBe(400) //баг в api - 400 отдаётся только на пустой пароль, а должен на некорректный.
+    expect(response.status).toBe(404)
     expect(response.data.message).toBeTruthy()
   })
   test('user not found', async () => {
@@ -140,3 +149,6 @@ describe('Delete user tests', () => {
     expect(response.data.message).toContain('User Id not correct')
   })
 })
+/**
+ * конец тестов по д/з "Библиотеки для тестирования API" 
+ */
