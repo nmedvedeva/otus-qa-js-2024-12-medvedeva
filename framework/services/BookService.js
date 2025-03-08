@@ -31,7 +31,21 @@ const BooksGetAll = async () => {
   }
 }
 
+const removeAllBooks = async ({ userID, token }) => {
+  const response = await client.delete(`/BookStore/v1/Books?UserId=${userID}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  return {
+    headers: response.headers,
+    status: response.status,
+    data: response.body
+  }
+}
+
 export default {
   create: BookCreate,
-  get: BooksGetAll
+  get: BooksGetAll,
+  remove: removeAllBooks
 }
