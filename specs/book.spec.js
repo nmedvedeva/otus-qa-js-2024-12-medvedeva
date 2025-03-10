@@ -3,7 +3,7 @@ import { books } from '../framework/fixtures/Books.json'
 import { generateBook } from '../framework/fixtures/randomBook.js'
 import { generateUserBookstore } from '../framework/fixtures/randomUser.js'
 
-let testUser, testBook, testUserName, testUserPassword, testUserId, token
+let testUser, testUserName, testUserPassword, testUserId, token, book2, isbn, isbn2
 
 beforeAll(async () => {
   const randomUser = await generateUserBookstore()
@@ -16,16 +16,16 @@ beforeAll(async () => {
     password: testUserPassword
   })
   token = responseToken.data.token
-  const response = await AuthService.login({
+  await AuthService.login({
     userName: testUserName,
     password: testUserPassword
   })
-  testBook = await generateBook()
   const [book1, book2] = books
-  const isbn = book1.isbn
+  isbn = book1.isbn
+  isbn2 = book2.isbn
 })
 
-describe('Get all book tests', () => {
+describe('Get all book', () => {
   test('success get all books list', async () => {
     const response = await BookService.get()
     expect(response.status).toBe(200)
@@ -33,9 +33,6 @@ describe('Get all book tests', () => {
   })
 })
 
-//создание книги
-//обновление книги
-//удаление книги
 describe('Delete all books', () => {
   test('Delete all books from users collection', async () => {
     const responseRemoveAll = await BookService.remove({ userID: testUserId, token })
@@ -44,15 +41,42 @@ describe('Delete all books', () => {
     expect(responseUser.data.books).toEqual([])
   })
 })
-/*
-describe('Add book tests', () => {
-  test('success add book', async () => {
-    const response = await BookService.create({
-      userId,
-      collectionOfIsbns
+
+describe('Add books', () => {
+  test('Add list of books into users collection', async () => {
+    const response = await BookService.addList({
+      userID: testUserId,
+      isbns: [isbn, isbn2],
+      token
     })
-    expect(response.status).toBe(200)
-    expect(response.data.status).toBe('Success')
-    expect(response.data.token).toBeTruthy()
+
+    expect(response.data).toEqual({ books: [{ isbn }] })
   })
-})*/
+})
+
+describe('Get book by isbn', () => {
+  test('Get info about book by isbn', async () => {
+    const response = await BookService.getByIsbn({
+      isbn,
+      token
+    })
+    expect(response.data.isbn).toEqual(isbn)
+  })
+})
+
+describe('Replace book by isbn', () => {
+  test('Success replace book by isbn', async () => {
+    const response = await BookService.replace({
+      userID: testUserId,
+      fromIsbn: isbn,
+      toIsbn: isbn2,
+      token
+    })
+    console.log(response)
+    expect(response.data).toEqual({
+      userID: testUserId,
+      username: testUserName,
+      books: [book2]
+    })
+  })
+})
