@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../config/config.js'
+import { cached } from '../utils/cache.js'
 
 const client = axios.create({
   baseURL: config.baseURL,
@@ -60,9 +61,24 @@ const GenerateToken = async ({ userName, password }) => {
   }
 }
 
+const generateTokenCached = cached(GenerateToken)
+
+const getTokenFromCache = async ({ userName, password }) => {
+  const response = await generateTokenCached({
+    userName,
+    password
+  })
+  if (typeof response.data.token !== 'string') {
+    throw new Error('No token in response')
+  }
+  return response.data.token
+}
+
 export default {
   create: UserCreate,
   delete: UserDelete,
   get: UserGetInfo,
-  generate: GenerateToken
+  generate: GenerateToken,
+  generateTokenCached,
+  getTokenFromCache
 }
