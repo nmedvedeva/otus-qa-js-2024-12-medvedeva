@@ -1,31 +1,6 @@
 import config from '../framework/config/config.js'
 import { UserService, AuthService, BookService } from '../framework/services/index.js'
 import { books } from '../framework/fixtures/Books.json'
-import { generateBook } from '../framework/fixtures/randomBook.js'
-import { generateUserBookstore } from '../framework/fixtures/randomUser.js'
-
-//let testUser, testUserName, testUserPassword, testUserId, token, book2, isbn, isbn2
-
-/*beforeAll(async () => {
-  const randomUser = await generateUserBookstore()
-  testUser = await UserService.create(randomUser)
-  testUserName = randomUser.userName
-  testUserPassword = randomUser.password
-  testUserId = testUser.data.userID
-  const responseToken = await UserService.generate({
-    userName: testUserName,
-    password: testUserPassword
-  })
-  token = responseToken.data.token
-  await AuthService.login({
-    userName: testUserName,
-    password: testUserPassword
-  })
-  const [book1, book2] = books
-  isbn = book1.isbn
-  isbn2 = book2.isbn
-})
-*/
 
 describe('All tests for books', () => {
   const userID = config.userID
@@ -46,7 +21,7 @@ describe('All tests for books', () => {
     })
   })
 
-  test('success get all books list', async () => {
+  test('Success get all books list', async () => {
     const response = await BookService.get()
     expect(response.status).toBe(200)
     expect(response.data).toEqual({ books })
@@ -62,7 +37,7 @@ describe('All tests for books', () => {
 
   test('Add list of books into users collection', async () => {
     const response = await BookService.addList({
-      userID,
+      userId: config.userID,
       isbns: [isbn],
       token
     })
@@ -72,25 +47,31 @@ describe('All tests for books', () => {
 
   test('Success replace book by isbn', async () => {
     const response = await BookService.replace({
-      userID,
+      userId: config.userID,
       fromIsbn: isbn,
       toIsbn: isbn2,
       token
     })
+    expect(response.data).toEqual({
+      books: [book2],
+      userId: config.userID,
+      username: config.login_correct
+    })
+  })
 
-    expect(response.data).toHaveProperty('userID', config.userID)
-    expect(response.data).toHaveProperty('username', config.login_correct)
-    expect(response.data).toHaveProperty('books.isbn', isbn2)
-    /*expect(response.data).toEqual({
-      userID,
-      username: config.login_correct,
-      books: [book2]
-    })*/
+  test('Replace book if it is not in the collection', async () => {
+    const response = await BookService.replace({
+      userId: config.userID,
+      fromIsbn: config.fake_isbn,
+      toIsbn: isbn2,
+      token
+    })
+    expect(response.status).toEqual(400)
   })
 
   test('Delete all books from users collection', async () => {
-    const responseRemoveAll = await BookService.remove({ userID, token })
-    expect(responseRemoveAll.status).toBe(204)
+    const response = await BookService.remove({ userID, token })
+    expect(response.status).toBe(204)
     const responseUser = await UserService.get({ userID, token })
     expect(responseUser.data.books).toEqual([])
   })

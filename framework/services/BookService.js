@@ -28,15 +28,18 @@ const BooksRemoveAll = async ({ userID, token }) => {
   }
 }
 
-const BooksAddList = async ({ userID, isbns, token }) => {
-  const response = await client.post(`/BookStore/v1/Books`, {
-    userID,
+const BooksAddList = async ({ userId, isbns, token }) => {
+  const payload = {
+    userId,
     collectionOfIsbns: isbns.map(isbn => ({ isbn }))
-  }, {
+  }
+  const config = {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json'
     }
-  })
+  }
+  const response = await client.post(`/BookStore/v1/Books`, payload, config)
   return {
     headers: response.headers,
     status: response.status,
@@ -57,15 +60,17 @@ const BookGetByIsbn = async ({ isbn, token }) => {
   }
 }
 
-const BooksReplace = async ({ userID, fromIsbn, toIsbn, token }) => {
-  const response = await client.put(`/BookStore/v1/Books/${fromIsbn}`, {
-    userID,
+const BooksReplace = async ({ userId, fromIsbn, toIsbn, token }) => {
+  const payload = {
+    userId,
     isbn: toIsbn
-  }, {
+  }
+  const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
-  })
+  }
+  const response = await client.put(`/BookStore/v1/Books/${fromIsbn}`, payload, config)
   return {
     headers: response.headers,
     status: response.status,
