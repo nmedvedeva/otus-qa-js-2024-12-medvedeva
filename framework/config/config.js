@@ -1,12 +1,8 @@
-import dotenv from 'dotenv'
-
-dotenv.config()
-
-const config = {
-  baseURL: process.env.BASE_URL,
-  login_correct: process.env.LOGIN_CORRECT,
-  password_correct: process.env.PASSWORD_CORRECT,
-  password_incorrect: process.env.PASSWORD_INCORRECT
-}
-
-export default config
+export default Object.freeze({
+  baseURL: process.env.BOOKSTORE_BASE_URL ?? 'https://bookstore.demoqa.com',
+  userID: process.env.BOOKSTORE_USER_ID,
+  login_correct: process.env.BOOKSTORE_LOGIN_CORRECT,
+  password_correct: process.env.BOOKSTORE_PASSWORD_CORRECT,
+  password_incorrect: process.env.BOOKSTORE_PASSWORD_INCORRECT,
+  fake_isbn: process.env.BOOKSTORE_FAKE_ISBN
+})
