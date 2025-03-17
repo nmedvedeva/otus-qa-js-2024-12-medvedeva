@@ -1,0 +1,284 @@
+<html><head><meta charset="utf-8"/><title>Test Report</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4F4F4F;
+  --success: #006633;
+  --success-bright: #80FFBF;
+  --danger: #CC071E;
+  --danger-bright: #FBDFE0;
+  --warning: #995C00;
+  --warning-bright: #FFEEA8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6B6B6B;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  margin: 2rem 0;
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Test Report</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-03-12 15:39:22</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (7)</div><div class="summary-passed ">6 passed</div><div class="summary-failed ">1 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (61)</div><div class="summary-passed ">58 passed</div><div class="summary-failed ">3 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/auth.spec.js</div><div class="suite-time">2.88s</div></summary><div class="suite-tests"><div class="test-result failed"><div class="test-info"><div class="test-suitename">Auth</div><div class="test-title">success user authorized</div><div class="test-status">failed</div><div class="test-duration">0.86s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Auth</div><div class="test-title">user not found</div><div class="test-status">failed</div><div class="test-duration">0.301s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Auth</div><div class="test-title">incorrect password</div><div class="test-status">failed</div><div class="test-duration">0.614s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth</div><div class="test-title">username not specified</div><div class="test-status">passed</div><div class="test-duration">0.324s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth</div><div class="test-title">password not specified</div><div class="test-status">passed</div><div class="test-duration">0.304s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/api.spec.js</div><div class="suite-time warn">8.065s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">User create tests</div><div class="test-title">success user create</div><div class="test-status">passed</div><div class="test-duration">0.544s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User create tests</div><div class="test-title">busy login</div><div class="test-status">passed</div><div class="test-duration">0.463s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User create tests</div><div class="test-title">incorrect password</div><div class="test-status">passed</div><div class="test-duration">0.363s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Generate token tests</div><div class="test-title">for success generate token</div><div class="test-status">passed</div><div class="test-duration">0.68s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Generate token tests</div><div class="test-title">for unsuccessful generate token</div><div class="test-status">passed</div><div class="test-duration">0.669s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth user tests</div><div class="test-title">success user authorized</div><div class="test-status">passed</div><div class="test-duration">0.484s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth user tests</div><div class="test-title">incorrect password</div><div class="test-status">passed</div><div class="test-duration">0.495s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth user tests</div><div class="test-title">user not found</div><div class="test-status">passed</div><div class="test-duration">0.528s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth user tests</div><div class="test-title">username not specified</div><div class="test-status">passed</div><div class="test-duration">0.299s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth user tests</div><div class="test-title">password not specified</div><div class="test-status">passed</div><div class="test-duration">0.297s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Get info about user tests</div><div class="test-title">for success get info</div><div class="test-status">passed</div><div class="test-duration">0.467s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Get info about user tests</div><div class="test-title">for unsuccessful get info</div><div class="test-status">passed</div><div class="test-duration">0.287s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Get info about user tests</div><div class="test-title">for unauthorized user</div><div class="test-status">passed</div><div class="test-duration">0.365s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Delete user tests</div><div class="test-title">for success delete user</div><div class="test-status">passed</div><div class="test-duration">0.278s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Delete user tests</div><div class="test-title">for unsuccessful delete user</div><div class="test-status">passed</div><div class="test-duration">0.296s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/book.spec.js</div><div class="suite-time">4.303s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">All tests for books</div><div class="test-title">Success get all books list</div><div class="test-status">passed</div><div class="test-duration">0.355s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">All tests for books</div><div class="test-title">Get info about book by isbn</div><div class="test-status">passed</div><div class="test-duration">0.36s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">All tests for books</div><div class="test-title">Add list of books into users collection</div><div class="test-status">passed</div><div class="test-duration">0.458s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">All tests for books</div><div class="test-title">Success replace book by isbn</div><div class="test-status">passed</div><div class="test-duration">0.508s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">All tests for books</div><div class="test-title">Replace book if it is not in the collection</div><div class="test-status">passed</div><div class="test-duration">0.498s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">All tests for books</div><div class="test-title">Delete all books from users collection</div><div class="test-status">passed</div><div class="test-duration">0.808s</div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/discount.test.js</div><div class="suite-time">0.101s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">calculateTotal</div><div class="test-title">{
+  name: 'valid discount of 10%',
+  products: [Array],
+  discount: 10,
+  expected: [Object]
+}</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">calculateTotal</div><div class="test-title">{
+  name: 'no discount applied',
+  products: [Array],
+  discount: 0,
+  expected: [Object]
+}</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">calculateTotal</div><div class="test-title">{
+  name: 'negative discount',
+  products: [Array],
+  discount: -10,
+  error: 'Скидка не может быть отрицательным числом.'
+}</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">calculateTotal</div><div class="test-title">{
+  name: 'discount over 100%',
+  products: [Array],
+  discount: 110,
+  error: 'Скидка не может быть больше 100%.'
+}</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/app.test.js</div><div class="suite-time">0.119s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">nameIsValid</div><div class="test-title">Функция импортируется без ошибок</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">nameIsValid</div><div class="test-title">Проверка на ввод корректного имени</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">nameIsValid</div><div class="test-title">Проверка на ввод имени &lt; 2 символов</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">nameIsValid</div><div class="test-title">Проверка на ввод имени с недопустимыми символами</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">nameIsValid</div><div class="test-title">Проверка на ввод имени с нестроковым значением</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">nameIsValid</div><div class="test-title">Проверка на ввод имени с пустой строкой</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">fullTrim</div><div class="test-title">Функция импортируется без ошибок</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">fullTrim</div><div class="test-title">Удаление пробелов в начале и конце строки</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">fullTrim</div><div class="test-title">Удаление пробелов внутри слова</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">fullTrim</div><div class="test-title">Возврат пустой строки для пустой строки</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">fullTrim</div><div class="test-title">Возврат пустой строки для undefined</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">fullTrim</div><div class="test-title">Возврат пустой строки для null</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Функция импортируется без ошибок</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Возврат 0 при пустом массиве</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Отображение общей суммы, если скидка не указана</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Отображение общей суммы с примененной скидкой</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">должен выбросить ошибку, если скидка не число</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Ошибка, если процент скидки меньше 0</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Ошибка, если процент скидки больше или равен 100</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">getTotal</div><div class="test-title">Корректный рассчёт для нескольких товаров: [10, 1] и [20, 2]</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/tale.test.js</div><div class="suite-time">0.096s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">kolobok function</div><div class="test-title">should return the correct response for дедушка</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">kolobok function</div><div class="test-title">should return the correct response for заяц</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">kolobok function</div><div class="test-title">should return the correct response for лиса</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">kolobok function</div><div class="test-title">should throw error for unknown character</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">newYear function</div><div class="test-title">should return the correct response for Дед Мороз</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">newYear function</div><div class="test-title">should return the correct response for Снегурочка</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">newYear function</div><div class="test-title">should return a default response for unknown character</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/nadya-qa/project/otus-qa-js-2024-12-medvedeva/specs/unit.test.js</div><div class="suite-time">0.094s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">greet function</div><div class="test-title">should return a greeting message with the given name</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">greet function</div><div class="test-title">should handle empty name gracefully</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">farewell function</div><div class="test-title">should return a farewell message with the given name</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">farewell function</div><div class="test-title">should handle empty name gracefully</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div></div></details></main></body></html>
