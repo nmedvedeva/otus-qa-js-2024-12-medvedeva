@@ -11,5 +11,8 @@ export default [
   {
     files: ['specs/**'],
     ...jest.configs['flat/recommended']
+  },
+  {
+    ignores: ['reports/**']
   }
 ]

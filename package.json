@@ -7,8 +7,12 @@
     "start": "babel-node src/main.js",
     "lint:ci": "eslint .",
     "lint": "eslint . --fix",
-    "test": "jest",
-    "test:myComponent": "jest specs/api.spec.js"
+    "test": "jest --runInBand",
+    "test:api": "jest specs/api.spec.js",
+    "test:Book": "jest specs/book.spec.js",
+    "allure": "allure serve reports/allure-results",
+    "allure:ci": "allure generate reports/allure-results --clean --report-dir reports/allure-report",
+    "allure:ci:show": "allure open reports/allure-report"
   },
   "author": "Nadezhda Medvedeva <griinadiine@yandex.ru>",
   "keywords": [],
@@ -19,20 +23,26 @@
     "@babel/node": "^7.25.7",
     "@babel/preset-env": "^7.25.8",
     "@eslint/js": "^9.12.0",
-    "@faker-js/faker": "^9.4.0",
+    "@faker-js/faker": "^9.5.0",
     "@types/jest": "^29.5.13",
+    "allure-commandline": "^2.33.0",
+    "allure-jest": "^3.2.0",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^28.11.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.10.0",
     "jest": "^29.7.0",
+    "jest-github-actions-reporter": "^1.0.3",
+    "jest-html-reporter": "^4.0.1",
+    "jest-html-reporters": "^3.1.7",
     "jest-junit-reporter": "^1.1.0",
     "npm-run-all2": "^6.2.3",
     "prettier": "^3.3.3"
   },
   "dependencies": {
     "axios": "^1.7.9",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "faker": "^5.5.3"
   }
 }
