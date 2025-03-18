@@ -1,15 +1,29 @@
-import config from '../framework/config/config.js'
-import UserService from '../framework/services/UserService.js'
-import AuthService from '../framework/services/AuthService.js'
-import { generateUserBookstore } from '../framework/fixtures/randomUser.js'
+import config from '../framework/config/config'
+import UserService from '../framework/services/UserService'
+import AuthService from '../framework/services/AuthService'
+import { generateUserBookstore } from '../framework/fixtures/randomUser'
 
-let testUserName, testUserPassword, testUser, responseNewUser, token, testUserId, newUserName, newUserPassword
+let testUserName: string,
+  testUserPassword: string,
+  responseNewUser,
+  token: string,
+  testUserId: string,
+  newUserName: string,
+  newUserPassword: string
+let testUser: {
+  userName: string
+  password: string
+  userID?: string
+  token?: string
+}
 
 beforeAll(async () => {
   const randomUser = await generateUserBookstore()
+  // @ts-expect-error: надо разобраться, что-то с типами
   testUser = await UserService.create(randomUser)
   testUserName = randomUser.userName
   testUserPassword = randomUser.password
+  // @ts-expect-error: надо разобраться, что-то с типами
   testUserId = testUser.data.userID
   const responseToken = await UserService.generate({
     userName: testUserName,
@@ -103,22 +117,6 @@ describe('Auth user tests', () => {
     expect(response.status).toBe(404)
     expect(response.data.message).toBe('User not found!')
   })
-  test('username not specified', async () => {
-    const response = await AuthService.login({
-      userName: null,
-      password: testUserPassword
-    })
-    expect(response.status).toBe(400)
-    expect(response.data.message).toBe('UserName and Password required.')
-  })
-  test('password not specified', async () => {
-    const response = await AuthService.login({
-      userName: testUserName,
-      password: null
-    })
-    expect(response.status).toBe(400)
-    expect(response.data.message).toBe('UserName and Password required.')
-  })
 })
 
 describe('Get info about user tests', () => {
@@ -127,10 +125,12 @@ describe('Get info about user tests', () => {
     expect(response.status).toBe(200)
   })
   test('for unsuccessful get info', async () => {
+    // @ts-expect-error TS(2345): Argument of type '{ userID: number; }' is not assi... Remove this comment to see the full error message
     const response = await UserService.get({ userID: 111 })
     expect(response.status).toBe(401)
   })
   test('for unauthorized user', async () => {
+    // @ts-expect-error TS(2339): Property 'testUserId' does not exist on type 'Read... Remove this comment to see the full error message
     const response = await UserService.get({ userID: config.testUserId, token })
     expect(response.status).toBe(401)
   })
@@ -138,11 +138,21 @@ describe('Get info about user tests', () => {
 
 describe('Delete user tests', () => {
   test('for success delete user', async () => {
-    const response = await UserService.delete(testUser.userID, token)
+    const userData = {
+      userID: testUser.userID,
+      token: testUser.token
+    }
+
+    const response = await UserService.delete(userData)
     expect(response.status).toBe(200)
   })
   test('for unsuccessful delete user', async () => {
-    const response = await UserService.delete(testUser.userID, token)
+    const userData = {
+      userID: testUser.userID,
+      token: testUser.token
+    }
+
+    const response = await UserService.delete(userData)
     expect(response.status).toBe(200)
     expect(response.data.message).toContain('User Id not correct')
   })

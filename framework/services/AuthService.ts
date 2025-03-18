@@ -1,12 +1,13 @@
 import axios from 'axios'
-import config from '../config/config.js'
+import config from '../config/config'
+import { Credentials } from '../models/'
 
 const auth = axios.create({
   baseURL: config.baseURL,
   validateStatus: () => true
 })
 
-const UserAuthorized = async ({ userName, password }) => {
+const UserAuthorized = async ({ userName, password }: Credentials) => {
   const response = await auth.post(`/Account/v1/Authorized`, {
     userName,
     password

@@ -1,13 +1,14 @@
 import axios from 'axios'
-import config from '../config/config.js'
-import { cached } from '../utils/cache.js'
+import config from '../config/config'
+import { cached } from '../utils/cache'
+import { Credentials, Books } from '../models/'
 
 const client = axios.create({
   baseURL: config.baseURL,
   validateStatus: () => true
 })
 
-const UserCreate = async ({ userName, password }) => {
+const UserCreate = async ({ userName, password }: Credentials) => {
   const response = await client.post(`/Account/v1/User`, {
     userName,
     password
@@ -20,7 +21,7 @@ const UserCreate = async ({ userName, password }) => {
   }
 }
 
-const UserDelete = async (userID, token) => {
+const UserDelete = async ({ userID, token }: Books) => {
   const response = await client.delete(`/Account/v1/User/${userID}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -34,7 +35,7 @@ const UserDelete = async (userID, token) => {
   }
 }
 
-const UserGetInfo = async ({ userID, token }) => {
+const UserGetInfo = async ({ userID, token }: Books) => {
   const response = await client.get(`/Account/v1/User/${userID}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -48,7 +49,7 @@ const UserGetInfo = async ({ userID, token }) => {
   }
 }
 
-const GenerateToken = async ({ userName, password }) => {
+const GenerateToken = async ({ userName, password }: Credentials) => {
   const response = await client.post(`/Account/v1/GenerateToken`, {
     userName,
     password
@@ -63,7 +64,7 @@ const GenerateToken = async ({ userName, password }) => {
 
 const generateTokenCached = cached(GenerateToken)
 
-const getTokenFromCache = async ({ userName, password }) => {
+const getTokenFromCache = async ({ userName, password }: Credentials) => {
   const response = await generateTokenCached({
     userName,
     password

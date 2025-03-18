@@ -1,16 +1,20 @@
 export const cached =
-  (fn, cache = new Map()) =>
-  async (...payload) => {
-    const cacheKey = JSON.stringify(payload)
+  // @ts-expect-error: надо разобраться, что-то с типами
 
-    if (!cache.has(cacheKey)) {
-      cache.set(cacheKey, fn(...payload))
-    }
 
-    try {
-      return await cache.get(cacheKey)
-    } catch (error) {
-      cache.delete(cacheKey)
-      throw error
+    (fn, cache = new Map()) =>
+    // @ts-expect-error: надо разобраться, что-то с типами
+    async (...payload) => {
+      const cacheKey = JSON.stringify(payload)
+
+      if (!cache.has(cacheKey)) {
+        cache.set(cacheKey, fn(...payload))
+      }
+
+      try {
+        return await cache.get(cacheKey)
+      } catch (error) {
+        cache.delete(cacheKey)
+        throw error
+      }
     }
-  }

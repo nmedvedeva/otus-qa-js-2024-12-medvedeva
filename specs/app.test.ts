@@ -18,6 +18,7 @@ describe('nameIsValid', () => {
   })
 
   test('Проверка на ввод имени с нестроковым значением', () => {
+    // @ts-expect-error: специальная проверка на тип
     expect(nameIsValid(123)).toBe(false)
   })
 
@@ -44,10 +45,12 @@ describe('fullTrim', () => {
   })
 
   test('Возврат пустой строки для undefined', () => {
+    // @ts-expect-error: специальная проверка на тип
     expect(fullTrim(undefined)).toBe('')
   })
 
   test('Возврат пустой строки для null', () => {
+    // @ts-expect-error: специальная проверка на тип
     expect(fullTrim(null)).toBe('')
   })
 })
@@ -70,6 +73,7 @@ describe('getTotal', () => {
   })
 
   test('должен выбросить ошибку, если скидка не число', () => {
+    // @ts-expect-error: специальная проверка на тип
     expect(() => getTotal([{ price: 10, quantity: 10 }], 'not-a-number')).toThrow('Скидка должна быть числом')
   })
 
@@ -94,6 +98,7 @@ describe('getTotal', () => {
   ]
 
   test.each(table)('%s', (name, items, discount, expectedTotal) => {
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     expect(getTotal(items, discount)).toBe(expectedTotal)
   })
 })
