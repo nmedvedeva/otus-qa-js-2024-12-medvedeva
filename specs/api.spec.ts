@@ -125,7 +125,7 @@ describe('Get info about user tests', () => {
     expect(response.status).toBe(200)
   })
   test('for unsuccessful get info', async () => {
-    // @ts-expect-error TS(2345): Argument of type '{ userID: number; }' is not assi... Remove this comment to see the full error message
+    // @ts-expect-error TS(0000): Argument of type '{ userID: number; }' is not assi... Remove this comment to see the full error message
     const response = await UserService.get({ userID: 111 })
     expect(response.status).toBe(401)
   })
