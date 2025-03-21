@@ -2,6 +2,7 @@ name: CI
 
 on: 
   push:
+  
   workflow_dispatch:
 
 permissions:
@@ -16,6 +17,7 @@ concurrency:
 jobs:
   codestyle:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,6 +29,7 @@ jobs:
 
   type-check:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,9 +43,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+
     env:
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} 
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -50,15 +55,11 @@ jobs:
         with:
           node-version: 20.18.0
           cache: 'npm'
-      - name: Записать переменные среды в .env
-        run: |
-          echo "BOOKSTORE_BASE_URL=https://bookstore.demoqa.com" > .env  # Изменил на ">" чтобы перезаписать
-          echo "TEST_ALLURE_REPO_URL=https://${ACCESS_TOKEN}@github.com/nmedvedeva/otus-qa-js-2024-12-medvedeva.git" >> .env  # Это должно работать
-
       - run: npm ci
-      - run: echo ${{ vars.ENV_FILE }} >> .env 
+      - run: echo ${{ vars.ENV_FILE }} >> .env
       - run: npx zx scripts/allure.ci.zx.mjs
         env:
+          TEST_ALLURE_REPO_URL: "https://${ACCESS_TOKEN}@github.com/nmedvedeva/otus-qa-js-2024-12-medvedeva.git"
           TEST_ALLURE_BRANCH_NAME: allure
           TEST_ALLURE_HISTORY_DIR: history
       - name: Setup Pages
@@ -73,14 +74,16 @@ jobs:
 
   notification:
     if: always()
-    needs: [codestyle, test]
+    needs: [ codestyle, test ]
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl --request POST \
-               --url https://api.telegram.org/bot${{ secrets.TEST_TELEGRAM_TOKEN }}/sendMessage \
+         curl --request POST \
+               --url https://api.telegram.org/bot${{secrets.TEST_TELEGRAM_TOKEN}}/sendMessage \
                --header 'Content-Type: application/json' \
-               --data '{ "chat_id": "${{ secrets.TEST_TELEGRAM_CHAT_ID }}", "text": "Report link: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" }'
+                --data '{ "chat_id": "${{secrets.TEST_TELEGRAM_CHAT_ID}}", "text": "Report link: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" }'
