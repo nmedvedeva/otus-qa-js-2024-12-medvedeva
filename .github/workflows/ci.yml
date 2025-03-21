@@ -1,6 +1,18 @@
 name: CI
 
-on: push
+on: 
+  push:
+  
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
   codestyle:
@@ -28,6 +40,10 @@ jobs:
       - run: npm run type-check
 
   test:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -38,4 +54,33 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: echo "${{vars.ENV_FILE}}" >> .env
-      - run: npm run test
+      - run: npx zx scripts/allure.ci.zx.mjs
+        env:
+          TEST_ALLURE_REPO_URL: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          TEST_ALLURE_BRANCH_NAME: allure
+          TEST_ALLURE_HISTORY_DIR: history
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'reports/allure-report'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notification:
+    if: always()
+    needs: [ codestyle, test ]
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+         curl --request POST \
+               --url https://api.telegram.org/bot${{secrets.TEST_TELEGRAM_TOKEN}}/sendMessage \
+               --header 'Content-Type: application/json' \
+                --data '{ "chat_id": "${{secrets.TEST_TELEGRAM_CHAT_ID}}", "text": "Report link: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" }'
