@@ -46,9 +46,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -59,7 +56,7 @@ jobs:
       - run: echo ${{ vars.ENV_FILE }} >> .env
       - run: npx zx scripts/allure.ci.zx.mjs
         env:
-          TEST_ALLURE_REPO_URL: "https://${ACCESS_TOKEN}@github.com/nmedvedeva/otus-qa-js-2024-12-medvedeva.git"
+          TEST_ALLURE_REPO_URL: "https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/nmedvedeva/otus-qa-js-2024-12-medvedeva.git"
           TEST_ALLURE_BRANCH_NAME: allure
           TEST_ALLURE_HISTORY_DIR: history
       - name: Setup Pages
