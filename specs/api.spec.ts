@@ -130,7 +130,7 @@ describe('Get info about user tests', () => {
     expect(response.status).toBe(401)
   })
   test('for unauthorized user', async () => {
-    // @ts-expect-error TS(2339): Property 'testUserId' does not exist on type 'Read... Remove this comment to see the full error message
+    // @ts-expect-error TS(0000): Property 'testUserId' does not exist on type 'Read... Remove this comment to see the full error message
     const response = await UserService.get({ userID: config.testUserId, token })
     expect(response.status).toBe(401)
   })
