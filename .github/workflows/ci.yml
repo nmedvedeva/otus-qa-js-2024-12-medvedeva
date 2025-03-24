@@ -56,7 +56,7 @@ jobs:
           node-version: 20.18.0
           cache: 'npm'
       - run: npm ci
-      - run: echo ${{ variables.ENV_FILE }} >> .env
+      - run: echo ${{ vars.ENV_FILE }} >> .env
       - run: npx zx scripts/allure.ci.zx.mjs
         env:
           TEST_ALLURE_REPO_URL: "https://${ACCESS_TOKEN}@github.com/nmedvedeva/otus-qa-js-2024-12-medvedeva.git"
