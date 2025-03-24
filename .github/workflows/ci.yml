@@ -55,11 +55,6 @@ jobs:
       - run: npm ci
       - run: echo ${{ vars.ENV_FILE }} >> .env
       - run: npm test
-      #- run: npx zx scripts/allure.ci.zx.mjs
-        #env:
-          #TEST_ALLURE_REPO_URL: "https://x-access-token:${{secrets.REPO_TOKEN}}@github.com/${{github.repository}}.git"
-          #TEST_ALLURE_BRANCH_NAME: allure
-          #TEST_ALLURE_HISTORY_DIR: history
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
