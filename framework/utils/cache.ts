@@ -1,5 +1,7 @@
 export const cached =
   // @ts-expect-error: надо разобраться, что-то с типами
+
+
     (fn, cache = new Map()) =>
     // @ts-expect-error: надо разобраться, что-то с типами
     async (...payload) => {
