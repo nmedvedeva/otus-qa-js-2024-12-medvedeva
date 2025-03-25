@@ -57,10 +57,10 @@ describe('User create tests', () => {
   })
   test('incorrect password', async () => {
     const response = await UserService.create({
-      userName: testUserName,
+      userName: config.login_correct,
       password: config.password_incorrect
     })
-    expect(response.status).toBe(400)
+    expect(response.status).toBe(404)
     expect(response.data.message).toBeTruthy()
   })
 })
@@ -80,7 +80,7 @@ describe('Generate token tests', () => {
     const response = await UserService.generate({
       userName: newUserName,
       password: config.password_incorrect
-    })    
+    })
     expect(response.status).toBe(200)
     expect(response.data.status).toBe('Failed')
     expect(response.data.token).toBeNull()
