@@ -52,9 +52,8 @@ jobs:
         with:
           node-version: 20.16.0
           cache: 'npm'
-      - run: npm ci
-      - name: Create .env File
-        run: echo "${{ secrets.ENV_FILE }}" >> .env
+      - run: npm ci      
+      - run: echo "${{ variables.ENV_FILE}}" >> .env
       - run: npm test
       - name: Setup Pages
         uses: actions/configure-pages@v4
