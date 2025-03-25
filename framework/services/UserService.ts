@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../config/config'
 import { cached } from '../utils/cache'
-import { Credentials, Books } from '../models/'
+import { Credentials } from '../models/'
 
 const client = axios.create({
   baseURL: config.baseURL,
@@ -21,7 +21,7 @@ const UserCreate = async ({ userName, password }: Credentials) => {
   }
 }
 
-const UserDelete = async ({ userID, token }: Books) => {
+const UserDelete = async ({ userID, token }: { userID: string; token: string }) => {
   const response = await client.delete(`/Account/v1/User/${userID}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -35,7 +35,7 @@ const UserDelete = async ({ userID, token }: Books) => {
   }
 }
 
-const UserGetInfo = async ({ userID, token }: Books) => {
+const UserGetInfo = async ({ userID, token }: { userID: string; token: string }) => {
   const response = await client.get(`/Account/v1/User/${userID}`, {
     headers: {
       Authorization: `Bearer ${token}`
