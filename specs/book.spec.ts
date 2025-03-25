@@ -15,10 +15,6 @@ describe('All tests for books', () => {
       userName: config.login_correct,
       password: config.password_correct
     })
-    await AuthService.login({
-      userName: config.login_correct,
-      password: config.password_correct
-    })
   })
 
   test('Success get all books list', async () => {
