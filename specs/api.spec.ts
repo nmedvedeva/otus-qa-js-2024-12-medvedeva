@@ -80,6 +80,7 @@ describe('Generate token tests', () => {
       userName: newUserName,
       password: config.password_incorrect
     })
+    console.log(response)
     expect(response.status).toBe(200)
     expect(response.data.status).toBe('Failed')
     expect(response.data.token).toBeNull()
