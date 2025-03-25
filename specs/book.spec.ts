@@ -23,7 +23,6 @@ describe('All tests for books', () => {
 
   test('Success get all books list', async () => {
     const response = await BookService.get()
-    console.log(response)
     expect(response.status).toBe(200)
     expect(response.data).toEqual({ books })
   })

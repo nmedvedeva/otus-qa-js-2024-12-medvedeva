@@ -106,7 +106,6 @@ describe('Auth user tests', () => {
       userName: config.login_correct,
       password: config.password_incorrect
     })
-    console.log(response)
     expect(response.status).toBe(404)
     expect(response.data.message).toBeTruthy()
   })
