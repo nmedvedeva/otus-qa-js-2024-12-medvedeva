@@ -76,11 +76,11 @@ describe('Generate token tests', () => {
     expect(response.data.token).toBeTruthy()
   })
   test('for unsuccessful generate token', async () => {
+    console.log(config.password_incorrect)
     const response = await UserService.generate({
       userName: newUserName,
       password: config.password_incorrect
-    })
-    console.log(response)
+    })    
     expect(response.status).toBe(200)
     expect(response.data.status).toBe('Failed')
     expect(response.data.token).toBeNull()
