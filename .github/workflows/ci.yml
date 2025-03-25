@@ -53,6 +53,7 @@ jobs:
           node-version: 20.16.0
           cache: 'npm'
       - run: npm ci
+      - name: Create .env File
       - run: echo ${{vars.ENV_FILE}} >> .env
       - run: npm test
       - name: Setup Pages
