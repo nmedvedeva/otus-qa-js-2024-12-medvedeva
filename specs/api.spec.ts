@@ -44,7 +44,6 @@ describe('User create tests', () => {
       userName: newUserName,
       password: newUserPassword
     })
-    console.log(newUserName, newUserPassword, responseNewUser)
     expect(responseNewUser.status).toBe(201)
     expect(responseNewUser.data.username).toBe(newUserName)
   })
