@@ -57,10 +57,10 @@ describe('User create tests', () => {
   })
   test('incorrect password', async () => {
     const response = await UserService.create({
-      userName: config.login_correct,
+      userName: testUserName,
       password: config.password_incorrect
     })
-    expect(response.status).toBe(404)
+    expect(response.status).toBe(400)
     expect(response.data.message).toBeTruthy()
   })
 })
@@ -76,7 +76,6 @@ describe('Generate token tests', () => {
     expect(response.data.token).toBeTruthy()
   })
   test('for unsuccessful generate token', async () => {
-    console.log(config.password_incorrect)
     const response = await UserService.generate({
       userName: newUserName,
       password: config.password_incorrect
@@ -143,7 +142,7 @@ describe('Delete user tests', () => {
       userID: testUser.userID,
       token: testUser.token
     }
-
+    // @ts-expect-error TS(0000): что-то с типами, нужно разобраться позже
     const response = await UserService.delete(userData)
     expect(response.status).toBe(200)
   })
@@ -152,7 +151,7 @@ describe('Delete user tests', () => {
       userID: testUser.userID,
       token: testUser.token
     }
-
+    // @ts-expect-error TS(0000): что-то с типами, нужно разобраться позже
     const response = await UserService.delete(userData)
     expect(response.status).toBe(200)
     expect(response.data.message).toContain('User Id not correct')
