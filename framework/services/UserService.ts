@@ -69,6 +69,7 @@ const getTokenFromCache = async ({ userName, password }: Credentials) => {
     userName,
     password
   })
+  console.log(response)
   if (typeof response.data.token !== 'string') {
     throw new Error('No token in response')
   }
