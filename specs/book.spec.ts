@@ -1,5 +1,5 @@
-import config from '../framework/config/config.js'
-import { UserService, AuthService, BookService } from '../framework/services/index.js'
+import config from '../framework/config/config'
+import { UserService, AuthService, BookService } from '../framework/services/index'
 import { books } from '../framework/fixtures/Books.json'
 
 describe('All tests for books', () => {
@@ -8,7 +8,7 @@ describe('All tests for books', () => {
   const isbn = book1.isbn
   const isbn2 = book2.isbn
 
-  let token
+  let token: string
 
   beforeAll(async () => {
     token = await UserService.getTokenFromCache({
@@ -28,10 +28,7 @@ describe('All tests for books', () => {
   })
 
   test('Get info about book by isbn', async () => {
-    const response = await BookService.getByIsbn({
-      isbn,
-      token
-    })
+    const response = await BookService.getByIsbn({ isbn, token })
     expect(response.data.isbn).toEqual(isbn)
   })
 
@@ -41,8 +38,8 @@ describe('All tests for books', () => {
       isbns: [isbn],
       token
     })
-    expect(response.status).toBe(201)
-    expect(response.data).toEqual({ books: [{ isbn }] })
+    expect(response?.status).toBe(201)
+    expect(response?.data).toEqual({ books: [{ isbn }] })
   })
 
   test('Success replace book by isbn', async () => {

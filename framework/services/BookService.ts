@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../config/config.js'
+import config from '../config/config'
 
 const client = axios.create({
   baseURL: config.baseURL,
@@ -15,7 +15,7 @@ const BooksGetAll = async () => {
   }
 }
 
-const BooksRemoveAll = async ({ userID, token }) => {
+const BooksRemoveAll = async ({ userID, token }: { userID: string; token: string }) => {
   const response = await client.delete(`/BookStore/v1/Books?UserId=${userID}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -24,11 +24,11 @@ const BooksRemoveAll = async ({ userID, token }) => {
   return {
     headers: response.headers,
     status: response.status,
-    data: response.body
+    data: response.data
   }
 }
 
-const BooksAddList = async ({ userId, isbns, token }) => {
+const BooksAddList = async ({ userId, isbns, token }: { userId: string; isbns: string[]; token: string }) => {
   const payload = {
     userId,
     collectionOfIsbns: isbns.map(isbn => ({ isbn }))
@@ -47,7 +47,7 @@ const BooksAddList = async ({ userId, isbns, token }) => {
   }
 }
 
-const BookGetByIsbn = async ({ isbn, token }) => {
+const BookGetByIsbn = async ({ isbn, token }: { isbn: string; token: string }) => {
   const response = await client.get(`/BookStore/v1/Book?ISBN=${isbn}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -60,7 +60,17 @@ const BookGetByIsbn = async ({ isbn, token }) => {
   }
 }
 
-const BooksReplace = async ({ userId, fromIsbn, toIsbn, token }) => {
+const BooksReplace = async ({
+  userId,
+  fromIsbn,
+  toIsbn,
+  token
+}: {
+  userId: string
+  fromIsbn: string
+  toIsbn: string
+  token: string
+}) => {
   const payload = {
     userId,
     isbn: toIsbn
