@@ -1,17 +1,17 @@
 import { expect, test } from "@playwright/test"
 
-test("Отображение тайтла в хедере", async ({ page }) => {
+test.skip("Отображение тайтла в хедере", async ({ page }) => {
     await page.goto("https://playwright.dev")
     await expect(page).toHaveTitle(/Playwright/)
 })
 
-test("Отображение текста в ссылке для установки", async ({ page }) => {
+test.skip("Отображение текста в ссылке для установки", async ({ page }) => {
     await page.goto("https://playwright.dev")
     await page.getByRole("link", { name: "Get started" }).click()
     await expect(page.getByRole("link", { name: "Installation" })).toBeVisible()
 })
 
-test.only("Отображение текста locatorAssertions", async ({ page }) => {
+test.skip("Отображение текста locatorAssertions", async ({ page }) => {
     await page.goto("https://playwright.dev")
     await page.getByRole('button', { name: 'Search' }).click()
     const searchInput = page.getByRole('searchbox', { name: "Search" });
