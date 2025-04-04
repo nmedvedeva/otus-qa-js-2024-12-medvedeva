@@ -5,11 +5,12 @@ test('Отображение тайтла в хедере', async ({ page }) => 
   await expect(page).toHaveTitle(/FloMarket/)
 })
 
-test('Открывается страница с каталогом для Москвы', async ({ page }) => {
+test.only('Открывается страница с каталогом для Москвы', async ({ page }) => {
   await page.goto('https://flomarket.com')
   const SearchInput = page.locator('[data-test-id="top-section"] [data-test-id="form-field-city-search"]')
   await SearchInput.click()
   await SearchInput.pressSequentially('Москва')
+  await page.screenshot({ path: 'screenshot.png' })
   await page.getByText('Москва Московская область').click()
   const cityTextElement = page.locator('.select-city__text')
   await expect(cityTextElement).toHaveText('Москва')
