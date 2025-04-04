@@ -5,7 +5,7 @@ test('Отображение тайтла в хедере', async ({ page }) => 
   await expect(page).toHaveTitle(/FloMarket/)
 })
 
-test.only('Открывается страница с каталогом для Москвы', async ({ page }) => {
+test('Открывается страница с каталогом для Москвы', async ({ page }) => {
   await page.goto('https://flomarket.com')
   const SearchInput = page.locator('[data-test-id="top-section"] [data-test-id="form-field-city-search"]')
   await SearchInput.click()
