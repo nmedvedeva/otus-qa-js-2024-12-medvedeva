@@ -39,7 +39,7 @@ jobs:
       - run: npm ci
       - run: npm run type-check
 
-  test:
+  test-jest:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -54,7 +54,33 @@ jobs:
           cache: 'npm'
       - run: npm ci      
       - run: echo "${{ vars.ENV_FILE}}" >> .env
-      - run: npm test
+      - run: npm test-jest
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'reports/allure-results'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  test-pw:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.16.0
+          cache: 'npm'
+      - run: npm ci      
+      - run: echo "${{ vars.ENV_FILE}}" >> .env
+      - run: npm test-pw
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
@@ -67,7 +93,7 @@ jobs:
 
   notification:
     if: always()
-    needs: [ codestyle, test ]
+    needs: [ codestyle, test-jest, test-pw ]
 
     environment:
       name: github-pages
