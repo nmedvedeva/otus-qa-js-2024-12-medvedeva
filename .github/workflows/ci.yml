@@ -81,7 +81,10 @@ jobs:
           node-version: 20.16.0
           cache: 'npm'
       - run: npm ci
-      - run: npx playwright install --with-deps   
+      - run: |
+          if [ ! -d "node_modules/@playwright/test" ]; then
+              npx playwright install --with-deps
+          fi   
       - run: echo "${{ vars.ENV_FILE}}" >> .env
       - run: npm run test-pw
       - name: Setup Pages
