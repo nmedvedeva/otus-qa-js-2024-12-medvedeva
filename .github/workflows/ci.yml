@@ -76,6 +76,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
       - uses: actions/setup-node@v4
         with:
           node-version: 20.16.0
@@ -83,8 +92,15 @@ jobs:
       - run: npm ci
       - run: |
           if [ ! -d "node_modules/@playwright/test" ]; then
+              echo "Installing Playwright and dependencies."
               npx playwright install --with-deps
-          fi   
+          else
+              echo "Checking if Playwright browsers are installed."
+              if [ ! -d "$HOME/.cache/ms-playwright/chromium_headless_shell-*/chrome-linux/headless_shell" ]; then
+                  echo "Installing Playwright browsers."
+                  npx playwright install
+              fi
+          fi 
       - run: echo "${{ vars.ENV_FILE}}" >> .env
       - run: npm run test-pw
       - name: Setup Pages
