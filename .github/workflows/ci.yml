@@ -39,7 +39,7 @@ jobs:
       - run: npm ci
       - run: npm run type-check
 
-  test:
+  test-jest:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -54,7 +54,9 @@ jobs:
           cache: 'npm'
       - run: npm ci      
       - run: echo "${{ vars.ENV_FILE}}" >> .env
-      - run: npm test
+      - run: npm run test-jest
+      - name: Get IP Address
+        run: curl ifconfig.me
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
@@ -65,9 +67,51 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  test-pw:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.16.0
+          cache: 'npm'
+      - run: npm ci
+      - run: |
+          if [ ! -d "node_modules/@playwright/test" ]; then
+              echo "Installing Playwright and dependencies."
+              npx playwright install --with-deps
+          else
+              echo "Checking if Playwright browsers are installed."
+              if [ ! -d "$HOME/.cache/ms-playwright/chromium_headless_shell-*/chrome-linux/headless_shell" ]; then
+                  echo "Installing Playwright browsers."
+                  npx playwright install
+              fi
+          fi 
+      - run: echo "${{ vars.ENV_FILE}}" >> .env
+      - run: npm run test-pw
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
   notification:
     if: always()
-    needs: [ codestyle, test ]
+    needs: [ codestyle, test-jest, test-pw ]
 
     environment:
       name: github-pages
