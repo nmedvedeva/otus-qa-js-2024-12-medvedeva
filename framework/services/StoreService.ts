@@ -1,7 +1,6 @@
 import axios from 'axios'
 import config from '../config/config'
 import { Store } from '../models/Store'
-//import { Store } from '../models/Store'
 
 const client = axios.create({
     baseURL: config.baseURL,

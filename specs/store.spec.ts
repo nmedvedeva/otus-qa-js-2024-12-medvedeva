@@ -10,7 +10,7 @@ describe('Get store inventory', () => {
 
 describe('Get order by id', () => {
     test('successful operation', async () => {
-        const response = await StoreService.getOrderById({ orderId: config.orderId})
+        const response = await StoreService.getOrderById({ orderId: config.orderId })
         expect(response.status).toBe(200)
     })
 })
