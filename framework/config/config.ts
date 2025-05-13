@@ -1,5 +1,5 @@
 export default Object.freeze({
-  baseURL: process.env.BOOKSTORE_BASE_URL ?? 'https://petstore.swagger.io/v2',
+  baseURL: process.env.PETSTORE_BASE_URL ?? 'https://petstore.swagger.io/v2',
   username: process.env.PETSTORE_USERNAME as string,
   username_incorrect: process.env.PETSTORE_USERNAME_INCORRECT as string,
   password_correct: process.env.PETSTORE_PASSWORD_CORRECT as string,
