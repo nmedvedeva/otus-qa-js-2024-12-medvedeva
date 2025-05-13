@@ -1,2 +1,1 @@
-export { generateBook } from './randomBook'
-export { generateUserBookstore } from './randomUser'
+export { generateUserCredentials } from './randomUser'

@@ -1,85 +1,89 @@
 import axios from 'axios'
 import config from '../config/config'
-import { cached } from '../utils/cache'
-import { Credentials } from '../models/'
-
+import { Credentials } from '../models/Credentials'
 const client = axios.create({
-  baseURL: config.baseURL,
-  validateStatus: () => true
+    baseURL: config.baseURL,
+    validateStatus: () => true
 })
 
-const UserCreate = async ({ userName, password }: Credentials) => {
-  const response = await client.post(`/Account/v1/User`, {
-    userName,
-    password
-  })
-
-  return {
-    headers: response.headers,
-    status: response.status,
-    data: response.data
-  }
-}
-
-const UserDelete = async ({ userID, token }: { userID: string; token: string }) => {
-  const response = await client.delete(`/Account/v1/User/${userID}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
+const UserCreate = async ({ username, firstName, lastName, email, password, phone, userStatus }: Credentials) => {
+    const response = await client.post(`/user/createWithArray`, [
+        {
+            username,
+            firstName,
+            lastName,
+            email,
+            password,
+            phone,
+            userStatus
+        }
+    ])
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
     }
-  })
-
-  return {
-    headers: response.headers,
-    status: response.status,
-    data: response.data
-  }
 }
 
-const UserGetInfo = async ({ userID, token }: { userID: string; token: string }) => {
-  const response = await client.get(`/Account/v1/User/${userID}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
+const UserGet = async ({ username }: Credentials) => {
+    const response = await client.get(`/user/${username}`)
+
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
     }
-  })
-
-  return {
-    headers: response.headers,
-    status: response.status,
-    data: response.data
-  }
 }
 
-const GenerateToken = async ({ userName, password }: Credentials) => {
-  const response = await client.post(`/Account/v1/GenerateToken`, {
-    userName,
-    password
-  })
-
-  return {
-    headers: response.headers,
-    status: response.status,
-    data: response.data
-  }
+const UserLogin = async ({ username, password }: Credentials) => {
+    const response = await client.get(`/user/login`, {
+        params: {
+            username,
+            password
+        }
+    })
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
+    }
 }
 
-const generateTokenCached = cached(GenerateToken)
+const UserUpdate = async (username: string, userDetails: Credentials) => {
+    const response = await client.put(`/user/${username}`, userDetails)
 
-const getTokenFromCache = async ({ userName, password }: Credentials) => {
-  const response = await generateTokenCached({
-    userName,
-    password
-  })
-  if (typeof response.data.token !== 'string') {
-    throw new Error('No token in response')
-  }
-  return response.data.token
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
+    }
+}
+
+const UserLogout = async () => {
+    const response = await client.get(`/user/logout`)
+
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
+    }
+}
+
+const UserDelete = async ({ username }: Credentials) => {
+    const response = await client.delete(`/user/${username}`)
+
+    return {
+        headers: response.headers,
+        status: response.status,
+        data: response.data
+    }
 }
 
 export default {
-  create: UserCreate,
-  delete: UserDelete,
-  get: UserGetInfo,
-  generate: GenerateToken,
-  generateTokenCached,
-  getTokenFromCache
+    create: UserCreate,
+    get: UserGet,
+    update: UserUpdate,
+    login: UserLogin,
+    logout: UserLogout,
+    delete: UserDelete
 }

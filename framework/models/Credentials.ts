@@ -1,4 +1,9 @@
 export interface Credentials {
-  userName: string
-  password: string
+  username?: string
+  firstName?: string
+  lastName?: string
+  email?: string
+  password?: string
+  phone?: string
+  userStatus?: string
 }
