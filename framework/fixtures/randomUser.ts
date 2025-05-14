@@ -11,10 +11,3 @@ export async function generateUserCredentials() {
     userStatus: 0
   }
 }
-
-export async function generateUserBookstore() {
-  return {
-    userName: faker.internet.username(),
-    password: faker.internet.password({ length: 10, pattern: /^[A-Za-z0-9]+$/, prefix: '!B1' })
-  }
-}
