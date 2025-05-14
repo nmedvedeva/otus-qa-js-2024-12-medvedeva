@@ -68,6 +68,7 @@ test('Добавление товара в корзину из карточки 
   const subCategory = 'В форме сердца'
   await catalogPage.openCategoryInSubmenu(subCategory)
   await catalogPage.openRandomProduct()
+  await page.waitForLoadState('domcontentloaded')
   await catalogPage.addToCart()
   const buttonAddToCart = page.locator(`.product__btn-buy`)
   await expect(buttonAddToCart).toHaveText(`В корзине`)
@@ -105,6 +106,7 @@ test('Удаление бесплатной открытки', async ({ page }) 
   await catalogPage.openCart()
   const PostcardMessage = 'Этот день счастливый самый! День Рождения твоего!'
   const cartPage = new CartPage(page)
+  await page.waitForLoadState('domcontentloaded')
   await cartPage.AddFreePostcard(PostcardMessage)
   await cartPage.DeletePostcardFromCart()
   await expect(page.locator('.cart-product__card-msg')).not.toBeVisible()
