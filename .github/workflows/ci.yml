@@ -101,11 +101,6 @@ jobs:
           fi 
       - run: echo "${{ vars.ENV_FILE}}" >> .env
       - run: npm run test-pw
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
 
   notification:
     if: always()
