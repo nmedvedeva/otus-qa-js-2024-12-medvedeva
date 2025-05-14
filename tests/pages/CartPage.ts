@@ -24,7 +24,9 @@ class CartPage {
   }
 
   async DeletePostcardFromCart(): Promise<void> {
-    const buttonDeleteItem: Locator = this.page.locator('.cart-product_postcard button.cart-product__btn svg path[fill-rule="evenodd"]')
+    const buttonDeleteItem: Locator = this.page.locator(
+      '.cart-product_postcard button.cart-product__btn svg path[fill-rule="evenodd"]'
+    )
     await buttonDeleteItem.click()
     const buttonApproveDelete = this.page.locator('.tingle-modal-box__footer .rb-btn_success')
     await buttonApproveDelete.click()
