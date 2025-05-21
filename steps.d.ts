@@ -13,9 +13,9 @@ declare namespace CodeceptJS {
 }
 
 declare function inject(): {
-  I: any,
-  loginPage: any,
-  config: any
+  I: I,
+  loginPage: loginPage,
+  config: config
 };
 
 //declare function actor<T extends object = any>(name?: string): T;
