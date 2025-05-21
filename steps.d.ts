@@ -18,4 +18,4 @@ declare function inject(): {
   config: any
 };
 
-declare function actor(): any;
+//declare function actor<T extends object = any>(name?: string): T;

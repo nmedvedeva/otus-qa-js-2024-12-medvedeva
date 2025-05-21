@@ -108,6 +108,7 @@
   "include": [
     "./tests/*_test.ts",
     "./steps.d.ts",
-    "./step_definitions/**/*.ts"
+    "./step_definitions/**/*.ts",
+    "./global.d.ts"
   ]
 }
